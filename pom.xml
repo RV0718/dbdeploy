@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.5.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.dbdeploy.maven</groupId>
+    <artifactId>dbdeploy</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>dbdeploy</name>
+    <description>Demo project for Spring Boot</description>
+
+    <properties>
+        <java.version>11</java.version>
+        <db.driver>com.mysql.cj.jdbc.Driver</db.driver>
+        <db.url>jdbc:mysql://localhost:3306/dbdeploy</db.url>
+        <db.user>root</db.user>
+        <db.passwd>root</db.passwd>
+        <db.schema>dbdeploy</db.schema>
+        <mysql.connector.version>8.0.16</mysql.connector.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+
+            <id>dbdeploy</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.dbdeploy</groupId>
+                        <artifactId>maven-dbdeploy-plugin</artifactId>
+
+                        <configuration>
+                            <outputfile>apply.sql</outputfile>
+                            <undoOutputfile>output.sql</undoOutputfile>
+                            <scriptdirectory>/Users/RV0718/projects/dbdeploy/src/main/resources/spring</scriptdirectory>
+                            <driver>com.mysql.jdbc.Driver</driver>
+                            <url>jdbc:mysql://localhost:3306/dbdeploy</url>
+                            <userid>${db.user}</userid>
+                            <password>${db.passwd}</password>
+                            <dbms>mysql</dbms>
+                            <delimiter>;</delimiter>
+                            <delimiterType>row</delimiterType>
+                        </configuration>
+                        <inherited>false</inherited>
+                        <dependencies>
+                            <dependency>
+                                <groupId>mysql</groupId>
+                                <artifactId>mysql-connector-java</artifactId>
+                                <version>${mysql.connector.version}</version>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <execution>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>db-scripts</goal>
+                                    <goal>update</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+
+                    </plugin>
+
+                </plugins>
+
+            </build>
+        </profile>
+
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
