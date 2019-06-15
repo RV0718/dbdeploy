@@ -1,15 +1,15 @@
 
--- START CHANGE SCRIPT #1: 001test.sql
+-- START CHANGE SCRIPT #2: 002test.sql
 
-insert into test_db_deploy values (1,'Ravi')
+insert into test_db_deploy values (2,'Ravi')
 ;
 commit;
 
 
 INSERT INTO changelog (change_number, complete_dt, applied_by, description)
- VALUES (1, CURRENT_TIMESTAMP, USER(), '001test.sql');
+ VALUES (2, CURRENT_TIMESTAMP, USER(), '002test.sql');
 
 COMMIT;
 
--- END CHANGE SCRIPT #1: 001test.sql
+-- END CHANGE SCRIPT #2: 002test.sql
 

@@ -60,7 +60,7 @@
                         <configuration>
                             <outputfile>apply.sql</outputfile>
                             <undoOutputfile>output.sql</undoOutputfile>
-                            <scriptdirectory>/Users/RV0718/projects/dbdeploy/src/main/resources/spring</scriptdirectory>
+                            <scriptdirectory>${project.basedir}/target/classes/spring</scriptdirectory>
                             <driver>com.mysql.jdbc.Driver</driver>
                             <url>jdbc:mysql://localhost:3306/dbdeploy</url>
                             <userid>${db.user}</userid>
